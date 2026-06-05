@@ -1,0 +1,39 @@
+{
+  "name": "jet-hub",
+  "owner": { "name": "JET" },
+  "metadata": {
+    "description": "JET legal tools for the North Dakota courts and bar — bench-memo, opinion-editing, interpretive-panel, rehearing, citation, and brief-compliance skills for Claude. Not an official product of the North Dakota Supreme Court."
+  },
+  "plugins": [
+    {
+      "name": "jetmemo",
+      "source": { "source": "github", "repo": "jet52/jetmemo-skill" },
+      "description": "North Dakota Supreme Court bench memos from publicly filed appellate briefs and record documents."
+    },
+    {
+      "name": "jetredline",
+      "source": { "source": "github", "repo": "jet52/jetredline" },
+      "description": "Edit and proofread ND appellate opinions, orders, and bench memos — tracked-changes output with Redbook and Bluebook checks."
+    },
+    {
+      "name": "jetpanel",
+      "source": { "source": "github", "repo": "jet52/jetpanel" },
+      "description": "Multi-perspective interpretive analysis for close statutory and constitutional questions."
+    },
+    {
+      "name": "jetrehearing",
+      "source": { "source": "github", "repo": "jet52/jetrehearing-skill" },
+      "description": "Analyze petitions for rehearing (N.D.R.App.P. 40) and draft a cross-check memo."
+    },
+    {
+      "name": "jetbriefcheck",
+      "source": { "source": "github", "repo": "jet52/jetbriefcheck" },
+      "description": "Check ND appellate brief PDFs for compliance with the Rules of Appellate Procedure."
+    },
+    {
+      "name": "jetcite",
+      "source": { "source": "github", "repo": "jet52/jetcite" },
+      "description": "Parse American legal citations and generate links to official government sources."
+    }
+  ]
+}
