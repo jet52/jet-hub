@@ -7,32 +7,32 @@
   "plugins": [
     {
       "name": "jetmemo",
-      "source": { "source": "github", "repo": "jet52/jetmemo-skill" },
+      "source": { "source": "url", "url": "https://github.com/jet52/jetmemo-skill.git" },
       "description": "North Dakota Supreme Court bench memos from publicly filed appellate briefs and record documents."
     },
     {
       "name": "jetredline",
-      "source": { "source": "github", "repo": "jet52/jetredline" },
+      "source": { "source": "url", "url": "https://github.com/jet52/jetredline.git" },
       "description": "Edit and proofread ND appellate opinions, orders, and bench memos — tracked-changes output with Redbook and Bluebook checks."
     },
     {
       "name": "jetpanel",
-      "source": { "source": "github", "repo": "jet52/jetpanel" },
+      "source": { "source": "url", "url": "https://github.com/jet52/jetpanel.git" },
       "description": "Multi-perspective interpretive analysis for close statutory and constitutional questions."
     },
     {
       "name": "jetrehearing",
-      "source": { "source": "github", "repo": "jet52/jetrehearing-skill" },
+      "source": { "source": "url", "url": "https://github.com/jet52/jetrehearing-skill.git" },
       "description": "Analyze petitions for rehearing (N.D.R.App.P. 40) and draft a cross-check memo."
     },
     {
       "name": "jetbriefcheck",
-      "source": { "source": "github", "repo": "jet52/jetbriefcheck" },
+      "source": { "source": "url", "url": "https://github.com/jet52/jetbriefcheck.git" },
       "description": "Check ND appellate brief PDFs for compliance with the Rules of Appellate Procedure."
     },
     {
       "name": "jetcite",
-      "source": { "source": "github", "repo": "jet52/jetcite" },
+      "source": { "source": "url", "url": "https://github.com/jet52/jetcite.git" },
       "description": "Parse American legal citations and generate links to official government sources."
     }
   ]
