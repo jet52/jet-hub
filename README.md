@@ -22,10 +22,10 @@ brief-compliance skills from one place, in Claude Cowork or Claude Code.
 | `jetbriefcheck` | Check ND appellate brief PDFs for Rules of Appellate Procedure compliance |
 | `jetcite` | Parse legal citations and link to official government sources |
 
-Several tools (notably `jetmemo` and `jetredline`) work best with the **ND Courts MCP
-server** for citation and precedent lookups. That is distributed separately — see
-[ND Courts MCP](#nd-courts-mcp-citation--precedent-lookups) below — because it requires
-a password that must not live in this public repository.
+Several tools (notably `jetmemo` and `jetredline`) work best with the **ndlaw MCP
+server** for citation and authority lookups across ND primary law. That is distributed
+separately — see [ndlaw MCP](#ndlaw-mcp-citation--authority-lookups) below — because it
+requires a password that must not live in this public repository.
 
 ---
 
@@ -57,17 +57,18 @@ Update later with `/plugin marketplace update jet-hub`.
 
 ---
 
-## ND Courts MCP (citation & precedent lookups)
+## ndlaw MCP (citation & authority lookups)
 
-`jetmemo` and `jetredline` call the `ndcourts` MCP server to verify citations and look up
-precedent. It is **not** bundled in this marketplace because it sits behind a password.
+`jetmemo` and `jetredline` call the `ndlaw` MCP server to verify citations and look up ND
+primary law — opinions (1889–present), the Constitution, N.D.C.C. statutes, court rules,
+and the Administrative Code. It is **not** bundled in this marketplace because it sits behind a password.
 Distribute it one of two ways:
 
 - **Per user (now):** have each member install the one-click bundle
-  [`ndcourts.mcpb`](https://github.com/jet52/ndcourts-mcp/raw/main/deploy/ndcourts.mcpb)
+  [`ndlaw.mcpb`](https://github.com/jet52/ndlaw/raw/main/deploy/ndlaw.mcpb)
   and enter the server URL, username, and password you provide. Requires Node.js on the
-  machine. See [ndcourts-mcp/deploy/CLIENTS.md](https://github.com/jet52/ndcourts-mcp/blob/main/deploy/CLIENTS.md).
-- **Org connector (cleaner, once auth is improved):** provision `ndcourts` as a managed
+  machine. See [ndlaw/deploy/CLIENTS.md](https://github.com/jet52/ndlaw/blob/main/deploy/CLIENTS.md).
+- **Org connector (cleaner, once auth is improved):** provision `ndlaw` as a managed
   connector so members don't handle the password directly.
 
 The skills degrade gracefully (web lookups) if the MCP isn't present, so it's recommended
