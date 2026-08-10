@@ -1,0 +1,86 @@
+name: Sync plugin release pins
+
+# Keeps .claude-plugin/marketplace.json pinned to each plugin repo's latest
+# STABLE release. Every bump lands as a merged PR on the default branch, which
+# is what Cowork's GitHub marketplace sync watches for.
+
+on:
+  schedule:
+    # Every 30 minutes. GitHub disables scheduled workflows in repos with no
+    # commit activity for 60 days -- this workflow's own commits reset that
+    # clock, but a long quiet stretch may need a manual re-enable.
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  # Optional: lets a plugin repo push a release notification for instant sync.
+  #   gh api repos/jet52/jet-hub/dispatches -f event_type=plugin-released
+  repository_dispatch:
+    types: [plugin-released]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-plugin-releases
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pin each plugin to its latest stable release
+        id: bump
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BODY_FILE: ${{ runner.temp }}/release-sync-body.md
+        run: python3 scripts/bump_refs.py
+
+      - name: Land the bump on the default branch
+        if: steps.bump.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BODY_FILE: ${{ runner.temp }}/release-sync-body.md
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          BRANCH="release-sync/${GITHUB_RUN_ID}"
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add .claude-plugin/marketplace.json
+          git commit -F - <<EOF
+          chore: pin plugins to latest releases
+
+          $(cat "$BODY_FILE")
+          EOF
+          git push origin "$BRANCH"
+
+          # Preferred path: a merged PR, which is the documented trigger for
+          # Cowork's marketplace auto-sync.
+          if gh pr create \
+               --base "$DEFAULT_BRANCH" --head "$BRANCH" \
+               --title "chore: pin plugins to latest releases" \
+               --body-file "$BODY_FILE"; then
+            gh pr merge "$BRANCH" --squash --delete-branch
+          else
+            # Falls here when "Allow GitHub Actions to create and approve pull
+            # requests" is off (Settings > Actions > General > Workflow
+            # permissions). Push straight to the default branch instead.
+            echo "::warning::PR creation failed; pushing directly to $DEFAULT_BRANCH"
+            git switch "$DEFAULT_BRANCH"
+            git merge --ff-only "$BRANCH"
+            git push origin "$DEFAULT_BRANCH"
+            git push origin --delete "$BRANCH" || true
+          fi
+
+      - name: Report
+        if: always()
+        env:
+          BODY_FILE: ${{ runner.temp }}/release-sync-body.md
+        run: |
+          echo "## Plugin release pins" >> "$GITHUB_STEP_SUMMARY"
+          cat "$BODY_FILE" >> "$GITHUB_STEP_SUMMARY" 2>/dev/null \
+            || echo "lookup failed -- existing pins left untouched" >> "$GITHUB_STEP_SUMMARY"
