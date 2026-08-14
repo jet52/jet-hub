@@ -19,7 +19,7 @@ brief-compliance skills from one place, in Claude Cowork or Claude Code.
 | `jetredline` | Edit/proofread ND appellate opinions, orders, and bench memos (tracked changes; Redbook/Bluebook checks) |
 | `jetpanel` | Multi-perspective interpretive analysis for close statutory/constitutional questions |
 | `jetrehearing` | Analyze petitions for rehearing (N.D.R.App.P. 40) and draft a cross-check memo |
-| `jetbriefcheck` | Check ND appellate brief PDFs for Rules of Appellate Procedure compliance |
+| `jetbriefcheck` | Check ND appellate brief PDFs for Rules of Appellate Procedure compliance; also scans each filing for concealed text — white-on-white, sub-legible, off-page, or otherwise invisible to a reader |
 | `jetcite` | Parse legal citations and link to official government sources |
 
 Several tools (notably `jetmemo` and `jetredline`) work best with the **ndlaw MCP
@@ -138,8 +138,11 @@ Claude to do.
 - Each tool repo carries its own `.claude-plugin/plugin.json` (the marketplace is a thin
   index; the tool repos are the source of truth). The `skills` path points at each repo's
   existing skill directory (`./skill`, or `./skills/jetredline`).
-- Marketplace entries currently track each repo's **default branch**. For controlled
-  releases, pin each entry to a tag — add a `source.ref` (e.g. `"ref": "v3.7.0"`) once a
-  release tag includes the `plugin.json`. Bump the tag to ship an update.
+- Marketplace entries are **pinned to release tags**, not to any default branch — every
+  entry carries a `source.ref`, and `.github/workflows/sync-plugin-releases.yml` bumps it
+  to each repo's latest stable release every 30 minutes. **A tool ships to users when you
+  publish a GitHub release, not when you push `main`.** Do not hand-edit a `ref`; the
+  sync owns that field. See [RELEASE-SYNC.md](RELEASE-SYNC.md) for how a release
+  propagates and how to force a sync.
 - Validate after changes: `claude plugin validate .` (marketplace) and
   `claude plugin validate ../<tool-repo>` (each plugin).

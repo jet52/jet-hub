@@ -50,7 +50,7 @@
         "url": "https://github.com/jet52/jetbriefcheck.git",
         "ref": "v2.4.0"
       },
-      "description": "Check ND appellate brief PDFs for compliance with the Rules of Appellate Procedure."
+      "description": "Check ND appellate brief PDFs for compliance with the Rules of Appellate Procedure, and scan each filing for concealed text."
     },
     {
       "name": "jetcite",
