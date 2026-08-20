@@ -21,7 +21,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/jet52/jetredline.git",
-        "ref": "v4.20.0"
+        "ref": "v4.21.0"
       },
       "description": "Edit and proofread ND appellate opinions, orders, and bench memos — tracked-changes output with Redbook and Bluebook checks."
     },
