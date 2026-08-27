@@ -61,15 +61,16 @@ Update later with `/plugin marketplace update jet-hub`.
 
 `jetmemo` and `jetredline` call the `ndlaw` MCP server to verify citations and look up ND
 primary law — opinions (1889–present), the Constitution, N.D.C.C. statutes, court rules,
-and the Administrative Code. It is **not** bundled in this marketplace because it sits behind a password.
-Distribute it one of two ways:
+and the Administrative Code. It is **not** bundled in this marketplace — connect it as a
+remote MCP server pointing at the hosted endpoint at [ndlaw.org](https://ndlaw.org). It is
+free and needs no account.
 
-- **Per user (now):** have each member install the one-click bundle
-  [`ndlaw.mcpb`](https://github.com/jet52/ndlaw/raw/main/deploy/ndlaw.mcpb)
-  and enter the server URL, username, and password you provide. Requires Node.js on the
-  machine. See [ndlaw/deploy/CLIENTS.md](https://github.com/jet52/ndlaw/blob/main/deploy/CLIENTS.md).
-- **Org connector (cleaner, once auth is improved):** provision `ndlaw` as a managed
-  connector so members don't handle the password directly.
+```
+claude mcp add --transport http ndlaw https://ndlaw.org/mcp
+```
+
+In Claude.ai or Claude Desktop, add a custom connector with the same URL. Any other MCP
+client: point its HTTP transport there.
 
 The skills degrade gracefully (web lookups) if the MCP isn't present, so it's recommended
 but not strictly required.
