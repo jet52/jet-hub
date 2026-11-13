@@ -12,7 +12,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/jet52/jetmemo-skill.git",
-        "ref": "v3.18.1"
+        "ref": "v3.19.0"
       },
       "description": "North Dakota Supreme Court bench memos from publicly filed appellate briefs and record documents."
     },
@@ -21,7 +21,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/jet52/jetredline.git",
-        "ref": "v4.27.0"
+        "ref": "v4.29.0"
       },
       "description": "Edit and proofread ND appellate opinions, orders, and bench memos — tracked-changes output with Redbook and Bluebook checks."
     },
@@ -39,7 +39,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/jet52/jetrehearing-skill.git",
-        "ref": "v1.3.1"
+        "ref": "v1.3.2"
       },
       "description": "Analyze petitions for rehearing (N.D.R.App.P. 40) and draft a cross-check memo."
     },
@@ -57,7 +57,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/jet52/jetcite.git",
-        "ref": "v2.16.0"
+        "ref": "v2.17.0"
       },
       "description": "Parse American legal citations and generate links to official government sources."
     }
